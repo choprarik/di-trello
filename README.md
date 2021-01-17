@@ -1,6 +1,36 @@
-# Getting Started with Create React App
+# DI Trello
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is UI component for a Trello like board.
+
+## System Requirements
+
+This project requires Node
+
+## Installation steps
+
+Follow these steps for installing this project:
+
+### Git clone
+
+Clone this git repository using this command:
+
+```git clone https://github.com/choprarik/di-trello.git```
+
+### Install node_modules
+
+Move to di-trello
+
+```cd di-trello```
+
+Install node modules
+
+```npm install```
+
+### Run application
+
+Run application through supported scripts
+
+Run ```npm start``` for serving application in development mode
 
 ## Available Scripts
 
