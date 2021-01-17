@@ -1,0 +1,118 @@
+.App {
+  background-image: url(./assets/bg-img.jpg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+}
+
+/* url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fin.pinterest.com%2Fpin%2F359654720248747528%2F&psig=AOvVaw2Uo1AfiEakWWK7awZC6OKw&ust=1610915316689000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiPmq6loe4CFQAAAAAdAAAAABAD) */
+/* background-color: rgba(110, 176, 218, 0.822); */
+
+.App-header {
+  background-color: rgba(51, 53, 54, 0.493);
+  text-align: center;
+  height: 40px;
+  padding: 4px 4px 4px 4px;
+  font-family: cursive;
+  font: outline;
+  font-style: italic;
+  font-weight: 800;
+  color:rgb(240, 232, 232)
+}
+
+.board {
+  padding: 8px 8px 8px 8px;
+  color: black;
+}
+
+.board-header {
+  background-color: rgba(0, 0, 0, 0);
+  line-height: 32px;
+}
+
+.designer {
+  min-height: 80vh;
+  max-height: 80vh;
+
+}
+.row-layout,
+.col-layout {
+  display: flex;
+}
+
+.col-layout {
+  flex-flow: column nowrap;
+}
+
+.row-layout {
+  flex-flow: row nowrap;
+}
+
+.swimlane {
+  background-color: rgb(240, 232, 232);;
+  margin: 8px 8px 8px 8px;
+  width: 300px;
+  border-radius: 3px;
+  height: max-content;
+  max-height: inherit;
+}
+
+.swimlane-header {
+  margin-top: 0px;
+  margin-left: 8px;
+  padding: 4px 4px 4px 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.card {
+  background-color: white;
+  margin: 8px 8px 8px 8px;
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.150);
+  z-index: 120;
+  border-radius: 3px;
+  min-height: 40px;
+  max-height: 100px;
+}
+.card-header {
+  background-color: white;
+  padding: 2px 2px 2px 2px;
+  line-height: 20px;
+  height: 20px;
+  font-size: 16px;
+  border: none;
+}
+
+.blank-card {
+  background-color: rgba(90, 83, 83, 0.308);
+  margin: 8px 8px 8px 8px;
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.150);
+  z-index: 100;
+  border-radius: 3px;
+  height: 40px;
+}
+
+.card-content {
+  font-size: 12px;
+  padding: 2px 2px 2px 2px;
+}
+.list {
+  list-style: none;
+  padding-left: 0px;
+  overflow: auto;
+  max-height: inherit;
+  height: max-content;
+}
+.list-item {
+  margin-top: 10px;
+}
+
+.app-button {
+  background-color: rgba(211, 211, 211, 0.74);
+  border-radius: 3px;
+  height: 32px;
+  font-size: 16px;
+  margin: 4px 4px 4px 4px;
+  text-align: center;
+  padding: 0px 4px 0px 4px;
+}
