@@ -1,6 +1,15 @@
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Swimlane from '../swimlane/Swimlane';
+import Add from '../add/Add';
+
+const getGuid = () => {
+    function _p8(s) {  
+        var p = (Math.random().toString(16)+"000000000").substr(2,8);  
+        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;  
+     }  
+     return _p8() + _p8(true) + _p8(true) + _p8();
+}
 
 class Board extends React.Component {
 
@@ -17,7 +26,7 @@ class Board extends React.Component {
         let sLanes = [];
         if (board && board.swimlanes) {
             for (let i=0; i<board.swimlanes.length; i++) {
-                sLanes.push(<Swimlane swimlane={board.swimlanes[i]}></Swimlane>);
+                sLanes.push(<Swimlane swimlane={board.swimlanes[i]} key={board.swimlanes[i].id}></Swimlane>);
             }
         }
         return <div className="board">
@@ -32,8 +41,8 @@ class Board extends React.Component {
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     {sLanes}
                 </DragDropContext>
-                <div className="swimlane app-button" onClick={() => {console.log("add swimlane")}}>
-                    Add Swimlane
+                <div className="swimlane">
+                    <Add name="Swimlane" addOption={this.addSwimlane.bind(this)}></Add>
                 </div>
             </div>
         </div>
@@ -43,20 +52,29 @@ class Board extends React.Component {
         const [removed] = list.splice(startIndex, 1);
         list.splice(endIndex, 0, removed);
     };
+
+    addSwimlane(swimlaneTitle) {
+        let board = this.state.board;
+        let id = 'list_' + getGuid();
+        if (board && board.swimlanes && board.swimlanes.length> 0) {
+        } else {
+            board.swimlanes = [];
+        }
+        board.swimlanes.push({
+            title: swimlaneTitle,
+            id,
+            tasks: []
+        });
+        this.setState({
+            ...this.state
+        });
+    }
     
     // Move item from one list to other
     move (source, destination, droppableSource, droppableDestination) {
-        // const sourceClone = Array.from(source);
-        // const destClone = Array.from(destination);
         const [removed] = source.splice(droppableSource.index, 1);
     
         destination.splice(droppableDestination.index, 0, removed);
-    
-        // const result = {};
-        // result[droppableSource.droppableId] = sourceClone;
-        // result[droppableDestination.droppableId] = destClone;
-    
-        // return result;
     };
 
     onDragEnd = (result) => {
@@ -73,14 +91,6 @@ class Board extends React.Component {
                 source.index,
                 destination.index
             );
-/* 
-            let state = { items };
-
-            if (source.droppableId === 'droppable2') {
-                state = { selected: items };
-            }
-
-            this.setState(state); */
         }
         // Interlist movement
         else {
@@ -90,11 +100,6 @@ class Board extends React.Component {
                 source,
                 destination
             );
-
-            // this.setState({
-            //     items: result.droppable,
-            //     selected: result.droppable2
-            // });
         }
         this.setState({
             ...this.state
@@ -104,65 +109,65 @@ class Board extends React.Component {
     getBoardData() {
         return {
             title: "Custom board",
-            swimlanes: [
-                {
-                    id: "list_1",
-                    title: "To Do",
-                    tasks: [{
-                        title: "Task 1",
-                        description: "Create wire frame",
-                        id: "task_1",
-                        index: 0,
-                        swimlaneId: 1
-                    },
-                    {
-                        title: "Task 2",
-                        description: "Convert to React",
-                        id: "task_2",
-                        index: 1,
-                        swimlaneId: 1
-                    },
-                    {
-                        title: "Task 3",
-                        description: "Add CSS to the page",
-                        id: "task_3",
-                        index: 2,
-                        swimlaneId: 1
-                    },
-                    {
-                        title: "Task 4",
-                        description: "Implement drag drop",
-                        id: "task_4",
-                        index: 3,
-                        swimlaneId: 1
-                    },
-                    {
-                        title: "Task 5",
-                        description: "Unit test and code push",
-                        id: "task_5",
-                        index: 5,
-                        swimlaneId: 1
-                    },
-                    {
-                        title: "Task 6",
-                        description: "Additional changes",
-                        id: "task_6",
-                        index: 5,
-                        swimlaneId: 1
-                    }
-                ]
-                },
-                {
-                    id: "list_2",
-                    title: "In Progress",
-                    tasks: []
-                },
-                {
-                    id: "List_3",
-                    title: "Completed",
-                    tasks: []
-                }
-            ]
+            // swimlanes: [
+            //     {
+            //         id: "list_1",
+            //         title: "To Do",
+            //         tasks: [{
+            //             title: "Task 1",
+            //             description: "Create wire frame",
+            //             id: "task_1",
+            //             index: 0,
+            //             swimlaneId: 1
+            //         },
+            //         {
+            //             title: "Task 2",
+            //             description: "Convert to React",
+            //             id: "task_2",
+            //             index: 1,
+            //             swimlaneId: 1
+            //         },
+            //         {
+            //             title: "Task 3",
+            //             description: "Add CSS to the page",
+            //             id: "task_3",
+            //             index: 2,
+            //             swimlaneId: 1
+            //         },
+            //         {
+            //             title: "Task 4",
+            //             description: "Implement drag drop",
+            //             id: "task_4",
+            //             index: 3,
+            //             swimlaneId: 1
+            //         },
+            //         {
+            //             title: "Task 5",
+            //             description: "Unit test and code push",
+            //             id: "task_5",
+            //             index: 5,
+            //             swimlaneId: 1
+            //         },
+            //         {
+            //             title: "Task 6",
+            //             description: "Additional changes",
+            //             id: "task_6",
+            //             index: 5,
+            //             swimlaneId: 1
+            //         }
+            //     ]
+            //     },
+            //     {
+            //         id: "list_2",
+            //         title: "In Progress",
+            //         tasks: []
+            //     },
+            //     {
+            //         id: "List_3",
+            //         title: "Completed",
+            //         tasks: []
+            //     }
+            // ]
         }
     };
 }

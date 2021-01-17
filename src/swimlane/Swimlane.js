@@ -1,6 +1,6 @@
 import React from 'react';
-import './Swimlane.css';
 import Task from '../task/Task';
+import Add from '../add/Add';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -12,6 +12,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey'
 });
+
+const getGuid = () => {
+    function _p8(s) {  
+        var p = (Math.random().toString(16)+"000000000").substr(2,8);  
+        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;  
+     }  
+     return _p8() + _p8(true) + _p8(true) + _p8();
+}
 
 class Swimlane extends React.Component {
 
@@ -55,10 +63,24 @@ class Swimlane extends React.Component {
                     </div>
                 )}
             </Droppable>
-            <div className="app-button" onClick={() => { console.log("add card") }}>
-                Add Card
-            </div>
+            <Add name="Card" addOption={this.addTask.bind(this)}/>
         </div>
+    }
+
+    addTask(taskTitle) {
+        let id = 'task_' + getGuid();
+        if (this.props.swimlane && this.props.swimlane.tasks && this.props.swimlane.tasks.length> 0) {
+        } else {
+            this.props.swimlane.tasks = [];
+        }
+        this.props.swimlane.tasks.push({
+            title: taskTitle,
+            id
+        });
+
+        this.setState({
+            ...this.state
+        });
     }
 }
 export default Swimlane;
