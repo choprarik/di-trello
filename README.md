@@ -2,6 +2,8 @@
 
 This project is UI component for a Trello like board.
 
+Play with it at [http://13.233.120.117:5000/](http://13.233.120.117:5000/)
+
 ## System Requirements
 
 This project requires Node
