@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Board from './board/Board'
+import React from 'react';
 
 function App() {
   return (
