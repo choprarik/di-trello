@@ -4,11 +4,11 @@ import Swimlane from '../swimlane/Swimlane';
 import Add from '../add/Add';
 
 const getGuid = () => {
-    function _p8(s) {  
-        var p = (Math.random().toString(16)+"000000000").substr(2,8);  
-        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;  
-     }  
-     return _p8() + _p8(true) + _p8(true) + _p8();
+    function _p8(s) {
+        var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+        return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+    }
+    return _p8() + _p8(true) + _p8(true) + _p8();
 }
 
 class Board extends React.Component {
@@ -17,15 +17,15 @@ class Board extends React.Component {
         board: this.getBoardData()
     };
 
-    getList (id) {
+    getList(id) {
         return this.state.board.swimlanes.filter(item => item.id === id)[0].tasks;
     }
-    
+
     render() {
         let board = this.state.board;
         let sLanes = [];
         if (board && board.swimlanes) {
-            for (let i=0; i<board.swimlanes.length; i++) {
+            for (let i = 0; i < board.swimlanes.length; i++) {
                 sLanes.push(<Swimlane swimlane={board.swimlanes[i]} key={board.swimlanes[i].id}></Swimlane>);
             }
         }
@@ -48,32 +48,33 @@ class Board extends React.Component {
         </div>
     }
 
-    reorder (list, startIndex, endIndex) {
+    reorder(list, startIndex, endIndex) {
         const [removed] = list.splice(startIndex, 1);
         list.splice(endIndex, 0, removed);
     };
 
     addSwimlane(swimlaneTitle) {
-        let board = this.state.board;
-        let id = 'list_' + getGuid();
-        if (board && board.swimlanes && board.swimlanes.length> 0) {
-        } else {
-            board.swimlanes = [];
+        if (swimlaneTitle) {
+            let board = this.state.board;
+            let id = 'list_' + getGuid();
+            if (board && board.swimlanes && board.swimlanes.length > 0) {
+            } else {
+                board.swimlanes = [];
+            }
+            board.swimlanes.push({
+                title: swimlaneTitle,
+                id,
+                tasks: []
+            });
+            this.setState({
+                ...this.state
+            });
         }
-        board.swimlanes.push({
-            title: swimlaneTitle,
-            id,
-            tasks: []
-        });
-        this.setState({
-            ...this.state
-        });
     }
-    
+
     // Move item from one list to other
-    move (source, destination, droppableSource, droppableDestination) {
+    move(source, destination, droppableSource, droppableDestination) {
         const [removed] = source.splice(droppableSource.index, 1);
-    
         destination.splice(droppableDestination.index, 0, removed);
     };
 
