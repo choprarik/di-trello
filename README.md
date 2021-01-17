@@ -4,6 +4,15 @@ This project is UI component for a Trello like board.
 
 Play with it at [http://13.233.120.117:5000/](http://13.233.120.117:5000/)
 
+## Features
+
+Users can:
+* Add swimlanes
+* Update titles of swimlanes
+* Add card
+* Drag/Drop card across swimlanes
+* Save board to local storage
+
 ## System Requirements
 
 This project requires Node

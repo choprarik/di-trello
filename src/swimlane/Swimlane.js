@@ -23,6 +23,14 @@ const getGuid = () => {
 
 class Swimlane extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.swimlane.title,
+            edit: false
+        };
+    }
+
     render() {
         let swimlane = this.props.swimlane;
         let tasks = [];
@@ -31,9 +39,15 @@ class Swimlane extends React.Component {
                 tasks.push(<Task task={swimlane.tasks[i]}></Task>);
             }
         }
+        let title;
+        if (!this.state.edit) {
+            title =  <span className="swimlane-header" onClick={this.toggle.bind(this)}>{swimlane.title}</span>;
+        } else {
+            title = <input className="swimlane-header" autoFocus value={this.state.value} onChange={this.handleTitleChange.bind(this)} onBlur={this.updateSwimlane.bind(this)}></input>;
+        }
         return <div className="swimlane" key={swimlane.id}>
             <header>
-                <span className="swimlane-header">{swimlane.title}</span>
+                {title}
             </header>
             <Droppable droppableId={swimlane.id}>
                 {(provided, snapshot) => (
@@ -65,6 +79,23 @@ class Swimlane extends React.Component {
             </Droppable>
             <Add name="Card" addOption={this.addTask.bind(this)} />
         </div>
+    }
+
+    toggle() {
+        this.setState({
+            edit: !this.state.edit
+        });
+    }
+
+    handleTitleChange(event) {
+        this.setState({
+            value: event.target.value
+        });
+    }
+
+    updateSwimlane(event) {
+        this.props.swimlane.title = this.state.value;
+        this.toggle();
     }
 
     addTask(taskTitle) {

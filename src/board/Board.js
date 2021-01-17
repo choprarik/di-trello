@@ -13,9 +13,19 @@ const getGuid = () => {
 
 class Board extends React.Component {
 
-    state = {
-        board: this.getBoardData()
-    };
+    constructor(props) {
+        super(props);
+        let board = localStorage.getItem("board");
+        if (board) {
+            this.state = {
+                board: JSON.parse(board)
+            };
+        } else {
+            this.state = {
+                board: this.getBoardData()
+            };
+        }
+    }
 
     getList(id) {
         return this.state.board.swimlanes.filter(item => item.id === id)[0].tasks;
@@ -35,6 +45,9 @@ class Board extends React.Component {
                     <span>
                         Board: {board.title}
                     </span>
+                </span>
+                <span className="app-button accent" onClick={this.saveBoardToLocalStorage.bind(this)}>
+                        <span>Save Board</span>
                 </span>
             </header>
             <div className="designer row-layout">
@@ -70,6 +83,10 @@ class Board extends React.Component {
                 ...this.state
             });
         }
+    }
+
+    saveBoardToLocalStorage () {
+        localStorage.setItem("board", JSON.stringify(this.state.board));
     }
 
     // Move item from one list to other

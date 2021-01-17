@@ -28,7 +28,8 @@ class Add extends React.Component {
                 </footer>
             </div>
         } else {
-            return <div className="app-button" onClick={this.toggle.bind(this)}>Add {this.props.name}
+            return <div className="app-button" onClick={this.toggle.bind(this)}>
+                <span>Add {this.props.name}</span>
             </div>
         }
     }
