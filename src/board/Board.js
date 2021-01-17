@@ -96,7 +96,9 @@ class Board extends React.Component {
             //     selected: result.droppable2
             // });
         }
-        this.render();
+        this.setState({
+            ...this.state
+        });
     };
 
     getBoardData() {

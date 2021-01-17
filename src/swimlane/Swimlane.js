@@ -6,13 +6,11 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
     background: isDragging ? 'grey' : 'none',
-
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    width: 250
+    background: isDraggingOver ? 'lightblue' : 'lightgrey'
 });
 
 class Swimlane extends React.Component {
